@@ -42,42 +42,27 @@ these together produces a checksum of 4 * 3 = 12.
 What is the checksum for your list of box IDs?
 """
 
-import numpy as np
+def parse_input(dtype=str):
 
-data = np.genfromtxt('input.txt',dtype='str')
+    return [dtype(line.rstrip('\n')) for line in open('input.txt')]
+
+data = parse_input()
 
 def find_repeat(inp):
 
-    reps = []
-    reps_2 = []
-    reps_3 = []
-    count_2 = 0
-    count_3 = 0
-
+    reps_2 = 0
+    reps_3 = 0
 
     for k in range(len(inp)):
-        reps.append([pos for pos, char in enumerate(inp) if char == inp[k]])
 
-    for t in reps:
+        t = [pos for pos, char in enumerate(inp) if char == inp[k]]
+
         if len(t) == 2:
-            reps_2.append(t)
+            reps_2 += 1
         if len(t) == 3:
-            reps_3.append(t)
+            reps_3 += 1
 
-    if reps_2:
-        count_2 =  len(reps_2)
-
-    if reps_3:
-        count_3 =  len(reps_3)
-
-    if count_3 > 0:
-        count_3 = 1
-
-    if count_2 > 0:
-        count_2 = 1
-    
-    return count_2, count_3
-
+    return reps_2 and True, reps_3 and True
 
 def main():
 

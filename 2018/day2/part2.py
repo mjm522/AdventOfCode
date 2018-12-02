@@ -22,9 +22,11 @@ What letters are common between the two correct box IDs? (In the example above, 
 removing the differing character from either ID, producing fgij.)
 """
 
-import numpy as np
+def parse_input(dtype=str):
 
-data = np.genfromtxt('input.txt',dtype='str')
+    return [dtype(line.rstrip('\n')) for line in open('input.txt')]
+
+data = parse_input()
 
 def main():
 
